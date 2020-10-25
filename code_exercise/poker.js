@@ -9,6 +9,13 @@ let PokerGame = class Poker {
     player1_cards = []
     player2_cards = []
 
+    cards = new Map([
+        ['2',0], ['3',1], ['4',2], ['5',3],
+        ['6',4], ['7',5], ['8',6], ['9',7],
+        ['10',8], ['J',9], ['Q',10], ['K',11],
+        ['A',12]
+    ])
+
     HANDVALUES = {
         ROYALFULUSH: 10,
         STRAIGHTFLUSH: 9,
@@ -57,6 +64,11 @@ let PokerGame = class Poker {
     
     same_rank = () => {
 
+        let rank = 0
+
+        for (let i = 0; i <= this.player1_cards.length; i++) {
+            
+        }
     }
 
     is_staright = () => {
