@@ -18,4 +18,5 @@ $ node poker.js
 &nbsp;&nbsp;&nbsp;&nbsp;
 
 # Result
-
+&nbsp;&nbsp;&nbsp;&nbsp;
+![alt txt](https://raw.githubusercontent.com/omar-csse/poker-game/master/result.png)
