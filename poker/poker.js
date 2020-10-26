@@ -1,5 +1,6 @@
 const readline = require('readline');
 const fs = require('fs');
+const path = require('path');
 
 
 let PokerGame = class Poker {
@@ -31,11 +32,15 @@ let PokerGame = class Poker {
         HIGHCARD: 1
     }
 
+    constructor(txtfile) {
+        this.txtfile = txtfile
+    }
+
     readHands = async () => {
         
         return new Promise((resolve, reject) => {
             const readPokerLine = readline.createInterface({
-                input: fs.createReadStream(__dirname + '/poker-hands.txt'),
+                input: fs.createReadStream(path.join(__dirname, this.txtfile)),
                 console: false
             });
         
@@ -203,7 +208,7 @@ let PokerGame = class Poker {
 
 
 let main = async () => {
-    let Poker = new PokerGame()
+    let Poker = new PokerGame('poker-hands.txt')
     Poker.play()
 }
 
