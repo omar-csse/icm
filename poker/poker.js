@@ -12,6 +12,9 @@ let PokerGame = class Poker {
     player1_hands_sorted = []
     player2_hands_sorted = []
 
+    /*
+        This cards map acts like a HashMap to link every card to an integer
+    */
     cards = new Map([
         ['2', 0], ['3', 1], ['4', 2], ['5', 3], 
         ['6', 4], ['7', 5], ['8', 6], ['9', 7], 
@@ -36,6 +39,12 @@ let PokerGame = class Poker {
         this.txtfile = txtfile
     }
 
+    /*
+        * Read the provided txt file, split the hands, sort them, 
+        * and map each card to its integer value.
+        *
+        * @param {}.
+    */
     readHands = async () => {
         
         return new Promise((resolve, reject) => {
@@ -69,6 +78,13 @@ let PokerGame = class Poker {
         
     }
 
+    /*
+        * Calculate repeated cards (helper 
+        * funcion to check whether we have pairs, trips, or quads), 
+        * Used in hand_rank
+        *
+        * @param {hand} the cards (sorted).
+    */
     frequencies = (hand) => {
         
         let freq = new Array(14)
@@ -81,6 +97,12 @@ let PokerGame = class Poker {
         return freq
     }
 
+    /*
+        * Check the max number of sequenced numbers (used to check straight)
+        * for example: [2,7,8,2,9]: the consecutive: 7,8,9
+        *
+        * @param {hand} the cards (sorted).
+    */
     consecutive = (hand) => {
 
         let count = 1
@@ -98,6 +120,12 @@ let PokerGame = class Poker {
         return { max: max, value: Math.max(...values) }
     }
 
+    /*
+        * Check if two arrays are equal
+        *
+        * @param {arr1}.
+        * @param {arr2}.
+    */
     arrEq = (arr1, arr2) => {
         let arrLength;
         if ((arrLength = arr1.length) != arr2.length) return false;
@@ -123,6 +151,12 @@ let PokerGame = class Poker {
         return {exist: false, card: 12}
     }
 
+    /*
+        * Get the rank of the hand
+        *
+        * @param {hand_original} the cards (unsorted and with the suit).
+        * @param {hand} the cards (sorted).
+    */
     hand_rank = async (hand_original, hand) => {
 
         let freq = this.frequencies(hand)
@@ -163,6 +197,14 @@ let PokerGame = class Poker {
 
     }
 
+    /*
+        * Check the winner of each hand
+        *
+        * @param {p1} player1 rank and highest card.
+        * @param {p2} player2 rank and highest card.
+        * @param {hand1} player1 hand.
+        * @param {hand2} player2 hand.
+    */
     check_rank = (p1, p2, hand1, hand2) => {
 
         let hand1_new = hand1
@@ -187,6 +229,13 @@ let PokerGame = class Poker {
         }
     }
 
+    /*
+        * Entry point
+        * Loop through all the games in the txt file to get the rank of each hand
+        * check the winner
+        * keep increamenting the winning of each player
+        *  
+    */
     play = async () => {
         
         await this.readHands()
